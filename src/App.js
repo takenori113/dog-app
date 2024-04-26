@@ -5,15 +5,15 @@ import React from 'react';
 const DogPictureDisplay = ({ imageUrl }) => {
 
   return (
-    <img src={imageUrl} alt="犬画像" />
+    <img src={imageUrl} alt="犬画像" className='picDisplay'/>
   );
 };
 
-const Buttons = ({fetchDogImage}) => {
+const Buttons = ({fetchDogImage,clearDogImage}) => {
   return (
     <div>
-      <FetchButton fetchDogImage={fetchDogImage} />
-      <ClearButton />
+      <FetchButton fetchDogImage={fetchDogImage}/>
+      <ClearButton clearDogImage={clearDogImage}/>
     </div>
 
   );
@@ -25,9 +25,9 @@ const FetchButton = ({fetchDogImage}) => {
   );
 };
 
-const ClearButton = () => {
+const ClearButton = ({clearDogImage}) => {
   return (
-    <button>clear</button>
+    <button onClick={()=>{clearDogImage()}}>clear</button>
   )
 }
 
@@ -45,10 +45,14 @@ function App() {
     }
   };
 
+  const clearDogImage = ()=>{
+    setImageUrl("");
+  }
+
   return (
     <div>
       {imageUrl && <DogPictureDisplay imageUrl={imageUrl} />}
-      <Buttons fetchDogImage={fetchDogImage} />
+      <Buttons fetchDogImage={fetchDogImage} clearDogImage={clearDogImage}/>
     </div>
 
   );
