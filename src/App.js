@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 
-const DogPictureDisplay = () => {
-  const imageUrl = "https://research.image.itmedia.co.jp/wp-content/uploads/2022/11/1667535503_67768680-1024x663.jpg"
+const DogPictureDisplay = ({ imageUrl }) => {
+
   return (
     <img src={imageUrl} alt="犬画像" />
   );
@@ -31,10 +31,11 @@ const ClearButton = () => {
 }
 
 function App() {
+  const imageUrl = "https://research.image.itmedia.co.jp/wp-content/uploads/2022/11/1667535503_67768680-1024x663.jpg"
   return (
     <div>
-      <DogPictureDisplay />
-      <Buttons/>
+      <DogPictureDisplay imageUrl={imageUrl} />
+      <Buttons />
     </div>
 
   );
