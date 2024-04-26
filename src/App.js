@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 const DogPictureDisplay = ({ imageUrl }) => {
 
@@ -8,19 +9,19 @@ const DogPictureDisplay = ({ imageUrl }) => {
   );
 };
 
-const Buttons = () => {
+const Buttons = ({fetchDogImage}) => {
   return (
     <div>
-      <FetchButton />
+      <FetchButton fetchDogImage={fetchDogImage} />
       <ClearButton />
     </div>
 
   );
 };
 
-const FetchButton = () => {
+const FetchButton = ({fetchDogImage}) => {
   return (
-    <button>fetch</button>
+    <button onClick={() => { fetchDogImage() }}>fetch</button>
   );
 };
 
@@ -31,11 +32,23 @@ const ClearButton = () => {
 }
 
 function App() {
-  const imageUrl = "https://research.image.itmedia.co.jp/wp-content/uploads/2022/11/1667535503_67768680-1024x663.jpg"
+  const [imageUrl, setImageUrl] = React.useState("");
+
+  const fetchDogImage = async () => {
+    try {
+      const url = "https://dog.ceo/api/breeds/image/random";
+      const res = await fetch(url);
+      const data = await res.json();
+      setImageUrl(data.message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div>
-      <DogPictureDisplay imageUrl={imageUrl} />
-      <Buttons />
+      {imageUrl && <DogPictureDisplay imageUrl={imageUrl} />}
+      <Buttons fetchDogImage={fetchDogImage} />
     </div>
 
   );
