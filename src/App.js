@@ -5,29 +5,29 @@ import React from 'react';
 const DogPictureDisplay = ({ imageUrl }) => {
 
   return (
-    <img src={imageUrl} alt="犬画像" className='picDisplay'/>
+    <img src={imageUrl} alt="犬画像" className='picDisplay' />
   );
 };
 
-const Buttons = ({fetchDogImage,clearDogImage}) => {
+const Buttons = ({ fetchDogImage, clearDogImage }) => {
   return (
     <div>
-      <FetchButton fetchDogImage={fetchDogImage}/>
-      <ClearButton clearDogImage={clearDogImage}/>
+      <FetchButton fetchDogImage={fetchDogImage} />
+      <ClearButton clearDogImage={clearDogImage} />
     </div>
 
   );
 };
 
-const FetchButton = ({fetchDogImage}) => {
+const FetchButton = ({ fetchDogImage }) => {
   return (
     <button onClick={() => { fetchDogImage() }}>fetch</button>
   );
 };
 
-const ClearButton = ({clearDogImage}) => {
+const ClearButton = ({ clearDogImage }) => {
   return (
-    <button onClick={()=>{clearDogImage()}}>clear</button>
+    <button onClick={() => { clearDogImage() }}>clear</button>
   )
 }
 
@@ -45,14 +45,18 @@ function App() {
     }
   };
 
-  const clearDogImage = ()=>{
+  const clearDogImage = () => {
     setImageUrl("");
   }
+
+  React.useEffect(() => {
+    fetchDogImage();
+  });
 
   return (
     <div>
       {imageUrl && <DogPictureDisplay imageUrl={imageUrl} />}
-      <Buttons fetchDogImage={fetchDogImage} clearDogImage={clearDogImage}/>
+      <Buttons fetchDogImage={fetchDogImage} clearDogImage={clearDogImage} />
     </div>
 
   );
